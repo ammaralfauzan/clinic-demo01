@@ -28,7 +28,7 @@
       --ff-head:  'DM Serif Display', Georgia, serif;
       --ff-body:  'DM Sans', sans-serif;
       /* layout */
-      --topbar-h: 68px;
+      --topbar-h: 64px;
       --max-w:    1100px;
       --col-form: 600px;
     }
@@ -78,11 +78,11 @@
       max-width: var(--max-w);
       margin: 0 auto;
       height: 100%;
-      padding: 0 clamp(16px, 4vw, 40px);
+      padding: 0 clamp(12px, 4vw, 40px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 8px;
     }
     .logo-wrap {
       display: flex;
@@ -91,19 +91,20 @@
       flex-shrink: 0;
     }
     .logo-img {
-      width: 48px; height: 48px;
+      width: 40px; height: 40px;
       border-radius: 50%;
       object-fit: cover;
       object-position: center;
       border: 2px solid var(--rose-md);
       box-shadow: 0 2px 12px rgba(212,96,122,.20);
       transition: transform .3s;
+      flex-shrink: 0;
     }
     .logo-wrap:hover .logo-img { transform: scale(1.05) rotate(3deg); }
     .logo-text { line-height: 1.2; }
     .logo-name {
       font-family: var(--ff-head);
-      font-size: clamp(.95rem, 2.2vw, 1.1rem);
+      font-size: clamp(.85rem, 2.2vw, 1.1rem);
       color: var(--ink);
       white-space: nowrap;
     }
@@ -138,10 +139,42 @@
     }
     .nav-pill.cta:hover { background: var(--rose-xdk); }
     /* mobile hide nav labels */
-    @media (max-width: 520px) {
-      .nav-text { display: none; }
-      .nav-pill { padding: 8px 12px; font-size: 0; }
-      .nav-pill svg { display: block; }
+    /* ── Mobile nav overhaul ──────────────────────── */
+    @media (max-width: 600px) {
+      .topbar { overflow: visible; }
+      .topbar-inner {
+        padding: 0 14px;
+        gap: 8px;
+        /* prevent children from blowing past viewport */
+        min-width: 0;
+        width: 100%;
+      }
+      /* logo: take remaining space, clip text gracefully */
+      .logo-wrap { gap: 8px; flex: 1 1 0; min-width: 0; overflow: hidden; }
+      .logo-img   { width: 38px; height: 38px; flex-shrink: 0; }
+      .logo-text  { min-width: 0; overflow: hidden; }
+      .logo-name  { font-size: .9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+      .logo-tagline { font-size: .6rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+      /* nav: never shrink, never overflow */
+      .topbar-nav { flex-shrink: 0; gap: 6px; }
+
+      /* hide "Layanan" pill on mobile — keep only CTA */
+      .nav-pill:not(.cta) { display: none; }
+
+      /* CTA "Daftar" — compact pill, width fits content */
+      .nav-pill.cta {
+        padding: 0 14px 0 10px;
+        height: 36px;
+        border-radius: 999px;
+        font-size: .82rem;
+        font-weight: 700;
+        gap: 5px;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+      .nav-pill.cta .nav-text { display: inline; }
+      .nav-pill.cta svg { width: 15px; height: 15px; flex-shrink: 0; }
     }
 
     /* ── PAGE WRAPPER ──────────────────────────────── */
