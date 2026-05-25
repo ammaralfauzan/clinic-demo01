@@ -1181,13 +1181,17 @@
     submitBtn.innerHTML = `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="animation:spin .8s linear infinite"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"/><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"/></svg> Mengirim…`;
 
     // ── Ganti URL ini dengan endpoint N8N Anda ──
-    const WEBHOOK_URL = 'https://n8n-rdxuqnxt2oi8.jkt5.sumopod.my.id/webhook-test/konsultasi';
-    try {
-      await fetch(WEBHOOK_URL, {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload), mode: 'no-cors',
-      });
-    } catch (_) {}
+    const WEBHOOK_URL = 'https://n8n-rdxuqnxt2oi8.jkt5.sumopod.my.id/webhook/konsultasi';
+
+try {
+  await fetch(WEBHOOK_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  });
+} catch (_) {}
 
     setTimeout(() => {
       formWrapper.style.display = 'none';
